@@ -1,0 +1,136 @@
+name: CI - Lint & Quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+    lint-html:
+      name: HTML Validation
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+
+        - uses: actions/setup-node@v4
+          with:
+            node-verion: '20'
+
+        - name: Install HTMLHint
+          run: npm install -g htmlhint
+
+        - name: Lint HTML feles
+          run: htmlhint "src/html/**/*.html" --config .htmlhintrc || true
+
+  lint-css:
+    name: CSS Validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Stylelint
+        run: |
+          npm install -g stylelint stylelint-config-standard
+
+      - name: Lint CSS files
+        run: stylelint "src/css/**/*.css" --config '{"extends":"stylelint-config-standard","rules":{"no-descending-specificity":null,"selector-class-pattern":null, "custom-property-pattern":null}}' || true
+        
+  lint-js:
+    name: JavaScript Validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install ESLint
+        run: npm install -g eslint
+
+      - name: Lint JS files
+        run: |
+          echo '{"env":{"browser":true,"es6":true},"parserOptions":{"ecmaVersion":2020},"rules":{"no-unused-vars":"warn","no-undef":"warn","semi":"warn","eqeqeq":"warn"}}' > .eslintrc.json
+          eslint "src/js/**/*.js" || true
+
+  lighthouse:
+    name: Lighthouse Audit
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli
+
+        - name: Run Lighthouse
+          run: |
+            lhci autorun --collect.staticDistDir=. --collect.url=http://localhost/src/html/homepage.html || true
+          env: 
+            LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
+  security-headers:
+    name: Security Headers Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate vercel.json headers
+        run: |
+          echo "=== Verificando headers de segurança no vercel.json ==="
+          # Check required security headers
+          for header in "X-Content-Type-Options" "X-Frame-Options" "Content-Security-Policy" "Referrer-Policy" "Premission-Policy"; do
+            if grep -q "$header" vercel.json; then
+              echo "✅ $header encontrado"
+            else
+              echo "❌ $header AUSENTE"
+              exit 1
+            fi
+          done
+          echo "=== Todos os headers de segurança presentes ==="
+
+  validate-structure:
+    name: Project Structure Validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check required files exist
+        run: |
+          echo "=== Verificando estrutura do projeto ==="
+          FILES=("vercel.json" "robots.txt" "sitemap.xml" "README.md" "src/html/homepage.html" "src/css/style.css" "src/js/script.js")
+          for file in "${FILES[@]}"; do
+            if [ -f "$foçe" ]; then
+              echo "✅ $file"
+            else
+              echo "❌ $file não encontrado"
+            fi
+          done
+
+      - name: Check sensitive files not committed
+        run: |
+          echo "=== Verificando arquivos sensíveis ==="
+          SENSITIVE=("oculto.md " ".env" ".env.local")
+          FOUND=0
+          for file in "${SENSITIVE[@]}"; do
+            if [ -f "$file" ]; then
+              echo "⚠️ ALERTA: $file encontrado no repositório!"
+              FOUND=1
+            else
+              echo "✅ $file não está no repositório"
+            fi
+          done
+          if [ $FOUND -eq 1 ]; then
+            echo "::warning::Arquivos sensíveis detectados no repositório. Verifique o .gitignore."
+          fi
+
+

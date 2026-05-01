@@ -7,6 +7,9 @@
     <meta name="description" content="Área administrativa - Gerenciamento de posts do blog.">
     <meta name="theme-color" content="#1c3a0d">
     <meta name="referrer" content="strict-origin-when-cross-origin">
+    <!-- SEGURANÇA: CSP restritiva para admin -->
+     <meta http-equiv="Content-Security-Policy"
+     content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src https://cdnjs.cloudflare.com; img-src 'self' data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; object-src 'none'; base-uri 'self'; from-action 'self'; frame-ancestors 'none';">
     <!-- SEGURANÇA: bloqueia indexação do admin por robôs -->
     <meta name="robots" content="noindex, nofollow">
     <title>Admin - Blog Nutricionista</title>

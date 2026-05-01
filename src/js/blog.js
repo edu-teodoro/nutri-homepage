@@ -16,7 +16,7 @@ var CONFIG_BLOG = {
     DEBOUNCE_BUSCA_MS: 350
 };
 
-console.log('Blog usando API:', CONFIG_BLOG.APPS_SCRIPT_URL);
+// API URL loaded from localStorage or fallback
 
 // Impede reatribuição acidental
 Object.defineProperty(window, "CONFIG_BLOG", { writable: false, configurable: false });
@@ -71,7 +71,7 @@ function formatarData(iso) {
 function debounce(fn, ms) {
     var timer;
     return function () {
-        var args = arguments; ctx = this;
+        var args = arguments, ctx = this;
         clearTimeout(timer);
         timer = setTimeout(function () { fn.apply(ctx, args); }, ms);
     };
@@ -189,7 +189,7 @@ function renderizarCards(posts, pagina) {
             '<span title="Curtidas" aria-label="' + (post.likes || 0) + ' curtidas">' + '<i class="fas fa-thumbs-up" aria-hidden="true"></i> ' + (post.likes || 0) +
             '</span>' +
             '</span>' +
-            '<span class="post-card-ler"></span>Ler <i class="fas fa-arrow-right" aria-hidden="true"></i></span>' +
+            '<span class="post-card-ler">Ler <i class="fas fa-arrow-right" aria-hidden="true"></i></span>' +
             '</div>' +
             '</div>';
 
@@ -301,7 +301,7 @@ function renderizarTemas(posts, ordenacao) {
         var li = document.createElement('li');
         var btn = document.createElement('button');
         btn.className = 'tema-btn' + (_blogState.temaAtivo === tema ? ' ativo' : '');
-        btn.setAttribute('aria-pressed', _blogState.temaAtivo === tema ? ' true' : 'false');
+        btn.setAttribute('aria-pressed', _blogState.temaAtivo === tema ? 'true' : 'false');
 
         var span = document.createElement('span');
         span.textContent = tema;

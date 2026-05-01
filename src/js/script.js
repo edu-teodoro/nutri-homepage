@@ -191,9 +191,12 @@ function iniciarScrollUnificado() {
         }
     }, { passive: true });
 
-    //Recalcula altura em resize
+    //Recalcula altura em resize (ignora quando teclado virtual está aberto no mobile)
     var resizeTimeout;
     window.addEventListener('resize', function () {
+        var activeEl = document.activeElement;
+        var isInput = activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA' || activeEl.tagName === 'SELECT');
+        if (isInput) return;
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(updateHeaderHeight, 150);
     }, { passive: true });
@@ -505,7 +508,7 @@ function iniciarCarrossel() {
 
     // Pausa quando a página não está visivel (economia de recursos)
     document.addEventListener('visibilitychange', function () {
-        if (document.hidden) { pararAuto }
+        if (document.hidden) { pararAuto(); }
         else { iniciarAuto(); }
     });
 
@@ -540,7 +543,7 @@ function iniciarHamburger() {
     });
 
     document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && nav.classList.contains('nav-aberto')) fecharMenu(); btn.focus();
+        if (e.key === 'Escape' && nav.classList.contains('nav-aberto')) {fecharMenu(); btn.focus(); }
     });
 }
 
@@ -619,8 +622,8 @@ function iniciarCarrosselDepoimentos() {
     // Cria dots
     for (var i = 0; i < total; i++) {
         var dot = document.createElement('button');
-        dot.className = 'dep-dot' + (i === 0 ? 'ativo' : '');
-        dot.setAttribute('aria-label', 'Depoimento' + (i + 1) + ' de ' + total);
+        dot.className = 'dep-dot' + (i === 0 ? ' ativo' : '');
+        dot.setAttribute('aria-label', 'Depoimento ' + (i + 1) + ' de ' + total);
         dot.setAttribute('role', 'tab');
         dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
         dot.dataset.index = i;
