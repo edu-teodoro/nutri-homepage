@@ -50,5 +50,9 @@ package-lock.json
 ### Vercel ###
 .vercel/
 
-### arquivo oculto ###
-oculto.md
+### Arquivos internos/confidenciais ###
+/oculto.md
+
+### Ambiente ###
+.env
+.env.*

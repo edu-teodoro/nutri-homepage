@@ -230,14 +230,14 @@ function processarVoto(corpo) {
     var dados = aba.getDataRange().getValues();
     for (var i = 1; i < dados.length; i++) {
         if (String(dados[i][0]) === id) {
-            var colLike = 7; // coluna G (index 6) = likes
-            var colDislike = 8; // coluna H (index 7) = dislikes
-            var likes = parseInt(dados[i][6]) || '0';
-            var dislikes = parseInt(dados[i][7]) || '0';
+            var colLike = 7; // coluna G (1-indexed) = likes
+            var colDislike = 8; // coluna H (1-indexed) = dislikes
+            var likes = parseInt(dados[i][6], 10) || 0;
+            var dislikes = parseInt(dados[i][7], 10) || 0;
 
             if (tipo === 'like') {
                 likes++;
-                aba.getRange(i + 1, colLike + 1).setValue(likes);
+                aba.getRange(i + 1, colLike).setValue(likes);
                 } else {
                 dislikes++;
                 aba.getRange(i + 1, colDislike).setValue(dislikes);
