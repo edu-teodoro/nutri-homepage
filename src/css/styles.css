@@ -108,6 +108,7 @@ html[data-tema="claro"] body {
     background: var(--polpa-verde);
     color: var(--texto-escuro);
 }
+
 html[data-tema="claro"] img {
     filter: none;
 }
@@ -120,7 +121,7 @@ html[data-tema="claro"] img {
     box-sizing: border-box;
 }
 
-html{
+html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
     overflow-x: hidden;
@@ -133,7 +134,7 @@ html:has(input:focus, textarea:focus, select:focus) {
     scroll-behavior: auto;
 }
 
-body{
+body {
     font-family: 'Segoe UI', Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -149,18 +150,18 @@ body{
     min-height: 100vh;
 }
 
-h2{
+h2 {
     color: var(--casca-media);
     margin-bottom: 0.5rem;
 }
 
-h3{
+h3 {
     color: var(--casca-media);
 }
 
 img {
     max-width: 100%;
-    height:auto;
+    height: auto;
 }
 
 /* - 2b. SKIP TO CONTENT (acessibilidade) */
@@ -179,6 +180,7 @@ img {
     text-decoration: none;
     transition: top var(--transition-fast);
 }
+
 .skip-link:focus {
     top: 0;
 }
@@ -200,9 +202,14 @@ img {
     gap: 0.75rem;
 }
 
-.mt-1 { margin-top: 1.2rem; }
+.mt-1 {
+    margin-top: 1.2rem;
+}
 
-.texto-medio { color: var(--texto-medio); margin-top: 0; }
+.texto-medio {
+    color: var(--texto-medio);
+    margin-top: 0;
+}
 
 .sr-only {
     position: absolute;
@@ -227,7 +234,19 @@ img {
     font-size: 0.85rem;
     font-weight: bold;
     color: var(--casca-media);
-    margin-bottom: 0.3rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .campo-grupo label {
+        color: var(--caroco-claro);
+    }
+}
+
+html[data-tema="escuro"] .campo-grupo label {
+    color: var(--caroco-claro);
+}
+
+margin-bottom: 0.3rem;
 }
 
 .campo-grupo label .obrigatorio {
@@ -247,6 +266,7 @@ img {
     0% {
         background-position: 200% 0;
     }
+
     100% {
         background-position: -200% 0;
     }
@@ -335,10 +355,15 @@ img {
 }
 
 @keyframes whatsapp-pulse {
-    0%, 100% {
-        box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);}
+
+    0%,
+    100% {
+        box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+    }
+
     50% {
-        box-shadow: 0 4px 24px rgba(37, 211, 102, 0.6);}
+        box-shadow: 0 4px 24px rgba(37, 211, 102, 0.6);
+    }
 }
 
 /* Tooltip do Whatsapp flutuante */
@@ -387,7 +412,7 @@ header {
     color: #fff;
     padding: 2.5rem 1rem 2rem 1rem;
     text-align: center;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
     position: sticky;
     top: 0;
     z-index: 9999;
@@ -401,7 +426,7 @@ header {
 
 header.compacto {
     padding: 0.6rem 1rem;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
 }
 
 header.compacto h1 {
@@ -460,8 +485,13 @@ nav a.ativo::after {
 }
 
 @keyframes nav-underline {
-    from { transform: scaleX(0); }
-    to { transform: scaleX(1); }
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
 }
 
 /* - 4b. BOTÃO TEMA (dark/light) */
@@ -481,7 +511,8 @@ nav a.ativo::after {
     gap: 0.3rem;
     position: absolute;
     top: 1rem;
-    right: 3.5rem; /* espaço para o hamburger no mobile */
+    right: 3.5rem;
+    /* espaço para o hamburger no mobile */
 }
 
 .btn-tema:hover {
@@ -498,6 +529,7 @@ nav a.ativo::after {
 .btn-tema .fa-sun {
     display: none;
 }
+
 .btn-tema .fa-moon {
     display: inline;
 }
@@ -505,6 +537,7 @@ nav a.ativo::after {
 html[data-tema="escuro"] .btn-tema .fa-moon {
     display: none;
 }
+
 html[data-tema="escuro"] .btn-tema .fa-sun {
     display: inline;
 }
@@ -512,6 +545,7 @@ html[data-tema="escuro"] .btn-tema .fa-sun {
 html[data-tema="claro"] .btn-tema .fa-moon {
     display: inline;
 }
+
 html[data-tema="claro"] .btn-tema .fa-sun {
     display: none;
 }
@@ -522,6 +556,7 @@ html[data-tema="claro"] .btn-tema .fa-sun {
     html:not([data-tema]) .btn-tema .fa-moon {
         display: none;
     }
+
     html:not([data-tema]) .btn-tema .fa-sun {
         display: inline;
     }
@@ -544,19 +579,22 @@ html[data-tema="claro"] .btn-tema .fa-sun {
 .hamburger:hover {
     transform: scale(1.1);
 }
+
 .hamburger .fa-times {
     display: none;
 }
+
 .hamburger.aberto .fa-bars {
     display: none;
 }
+
 .hamburger.aberto .fa-times {
     display: inline;
 }
 
 /* - 5. BOTÕES GLOBAIS */
 
-nav a.btn-whatsapp-nav{
+nav a.btn-whatsapp-nav {
     background: var(--whatsapp);
     color: #fff;
     padding: 0.4rem 1rem;
@@ -655,7 +693,7 @@ nav a.btn-whatsapp-nav:active {
     border: none;
     font-size: 1.3rem;
     cursor: pointer;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -685,7 +723,7 @@ nav a.btn-whatsapp-nav:active {
 
 footer {
     background: var(--casca-escura);
-    box-shadow: 0 -4px 16px rgba(0,0,0,0.25);
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.25);
     padding: 1.2rem 2rem;
     display: flex;
     justify-content: space-between;
@@ -765,7 +803,7 @@ footer p {
     position: absolute;
     left: -9999px;
     opacity: 0;
-    height: 0;    
+    height: 0;
     overflow: hidden;
     pointer-events: none;
 }
@@ -774,10 +812,10 @@ footer p {
 
 .campo-erro {
     border-color: #d32f2f !important;
-    box-shadow: 0 0 0 2px rgba(211,47,47,0.15);
+    box-shadow: 0 0 0 2px rgba(211, 47, 47, 0.15);
 }
 
-.erro-texto{
+.erro-texto {
     color: #d32f2f;
     font-size: 0.78rem;
     margin-top: -0.6rem;
@@ -811,13 +849,14 @@ footer p {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    *, 
-    *::before, 
+
+    *,
+    *::before,
     *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;        
+        scroll-behavior: auto !important;
     }
 
     .scroll-progress {
@@ -831,7 +870,7 @@ footer p {
 
 /* - 11. RESPONSIVO (compartilhado) */
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
     .hamburger {
         display: block;
         position: absolute;
@@ -917,11 +956,20 @@ footer p {
 /* - 12. IMPRESSÃO */
 
 @media print {
-    header, footer, .btn-whatsapp, .btn-whatsapp-nav, .btn-instagram, .btn-topo, .scroll-progress, .whatsapp-flutuante, .hamburger {
+
+    header,
+    footer,
+    .btn-whatsapp,
+    .btn-whatsapp-nav,
+    .btn-instagram,
+    .btn-topo,
+    .scroll-progress,
+    .whatsapp-flutuante,
+    .hamburger {
         display: none !important;
     }
-    
-    body{
+
+    body {
         background: #fff;
         color: #000;
     }
@@ -935,11 +983,25 @@ footer p {
 
 /* - 13. STAGGERED ENTRANCE ANIMATIONS */
 
-section:nth-child(1) { transition-delay: 0s; }
-section:nth-child(2) { transition-delay: 0.1s; }
-section:nth-child(3) { transition-delay: 0.2s; }
-section:nth-child(4) { transition-delay: 0.3s; }
-section:nth-child(5) { transition-delay: 0.4s; }
+section:nth-child(1) {
+    transition-delay: 0s;
+}
+
+section:nth-child(2) {
+    transition-delay: 0.1s;
+}
+
+section:nth-child(3) {
+    transition-delay: 0.2s;
+}
+
+section:nth-child(4) {
+    transition-delay: 0.3s;
+}
+
+section:nth-child(5) {
+    transition-delay: 0.4s;
+}
 
 /* 14. SELECTION STYLE */
 
