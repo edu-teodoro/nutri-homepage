@@ -6,7 +6,7 @@
 
 Um site profissional e responsivo para nutricionista especializado em bem-estar e saúde, construído com tecnologias web modernas e otimizado para performance, segurança e SEO.
 
-**[🌐 Acesse o Site](https://maianutrі.vercel.app)** | **[📧 Contato](mailto:contato@maianutrі.com.br)**
+**[🌐 Acesse o Portal](https://maianutri.vercel.app/)** | **[📧 Contato](mailto:contato@maianutrі.com.br)**
 
 ---
 
