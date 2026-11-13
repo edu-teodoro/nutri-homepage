@@ -2,7 +2,7 @@
 
 [![GitHub License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![Deploy](https://img.shields.io/badge/deploy-vercel-black.svg)](https://maianutri.vercel.app/)
+[![Deploy](https://img.shields.io/badge/deploy-vercel-black.svg)](https://maianutri.vercel.app)
 
 Um site profissional e responsivo para nutricionista especializado em bem-estar e saúde, construído com tecnologias web modernas e otimizado para performance, segurança e SEO.
 
